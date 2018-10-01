@@ -1,12 +1,20 @@
 {
-  "name": "socket-chat-example",
+  "name": "ChatTab",
   "version": "0.0.1",
-  "description": "my first socket.io app",
+  "description": "Live chat with others on the same site.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lwilli/ChatTab.git"
+  },
   "dependencies": {
     "express": "^4.15.2",
     "socket.io": "^1.7.3"
   },
   "scripts": {
     "start": "node index.js"
-  }
+  },
+  "engines": {
+    "node": "9.7.1"
+  },
+  "license": "MIT"
 }
