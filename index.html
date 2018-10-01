@@ -5,26 +5,54 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      #user-count { 
+        padding: 1em; 
+        width: 100%; 
+        background: #ebebeb;
+        border-width: 1px;
+        border-bottom-width: 1px;
+        border-bottom-color:black;
+        border-bottom-style: solid;
+        -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+      }
+      form { background: #333; padding: 5px; position: fixed; bottom: 0; width: 100%; }
       form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
+      #messages li:nth-child(odd) { background: #f0f0f0; }
       #messages { margin-bottom: 40px }
+
+      /* The sticky class is added to the header with JS when it reaches its scroll position */
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%
+      }
+
+      /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+      .sticky + .content {
+        padding-top: 102px;
+      }
     </style>
   </head>
   <body>
+    <div id="user-count">
+      # users on this site:
+      <strong><span id="num-users"></span></strong>
+    </div>
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" autocomplete="off" autofocus="autofocus"/><button>Send</button>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
         var socket = io();
-
+      
         function appendMessage(msg) {
           var messagesList = document.getElementById("messages");
           var messageElement = document.createElement("li");
@@ -47,6 +75,32 @@
           $('#messages').append($('<li>').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
         });
+
+        function setActiveUserCount(count) {
+          $('#num-users').text(count);
+        }
+        
+        socket.on('user count', function(count) {
+          setActiveUserCount(count);
+        });
+
+        // When the user scrolls the page, execute myFunction 
+        window.onscroll = function() {updateStickyHeader()};
+        
+        // Get the header
+        var header = document.getElementById("user-count");
+
+        // Get the offset position of the navbar
+        var sticky = header.offsetTop;
+
+        // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function updateStickyHeader() {
+          if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+          } else {
+            header.classList.remove("sticky");
+          }
+        }
       });
     </script>
   </body>
