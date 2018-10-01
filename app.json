@@ -10,7 +10,7 @@
     "express",
     "socket.io",
     "realtime",
-    "websocket"
+    "chat"
   ],
   "scripts": {
   },

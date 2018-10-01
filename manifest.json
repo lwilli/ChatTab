@@ -1,0 +1,11 @@
+{
+  "name": "ChatTab",
+  "version": "0.0.1",
+  "description": "Live chat with others on the same site as you.",
+  "permissions": [],
+  "browser_action": {
+      "default_title": "ChatTab",
+      "default_popup": "index.html"
+  },
+  "manifest_version": 2
+}

@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>ChatTab</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
+      body { font: 13px Helvetica, Arial; min-width: 300px; min-height: 400px; }
       #user-count { 
         padding: 1em; 
         width: 100%; 
@@ -52,17 +52,10 @@
     <script>
       $(function () {
         var socket = io();
-      
-        function appendMessage(msg) {
-          var messagesList = document.getElementById("messages");
-          var messageElement = document.createElement("li");
-          messageElement.appendChild(document.createTextNode(msg));
-          messagesList.appendChild(messageElement);
-        }
-
+    
         $('form').submit(function(){
-          // Add the message to the list
-          $('#messages').append($('<li>').text($('#m').val()));
+          // Add their own message to the list
+          $('#messages').append($('<li>').text($('#m').val()).css('text-align', 'right'));
           window.scrollTo(0, document.body.scrollHeight);
           
           // Send the message to everyone else
