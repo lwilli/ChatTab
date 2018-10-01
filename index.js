@@ -1,13 +1,17 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
+io.origins('*:*');
 
 var numActiveUsers = 0;
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
+
+app.use('/public', express.static(__dirname + '/public'));
 
 io.on('connection', function(socket){
   numActiveUsers += 1;

@@ -7,5 +7,6 @@
       "default_title": "ChatTab",
       "default_popup": "index.html"
   },
-  "manifest_version": 2
+  "manifest_version": 2,
+  "content_security_policy":"script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js https://code.jquery.com/jquery-1.11.1.js; object-src 'self'"
 }
