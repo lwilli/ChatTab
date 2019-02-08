@@ -2,16 +2,18 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var path = require("path");
 var port = process.env.PORT || 3000;
 io.origins('*:*');
 
 var numActiveUsers = 0;
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  // get ../index.html
+  res.sendFile(path.resolve(__dirname, '..', 'index.html'));
 });
 
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/client', express.static(path.resolve(__dirname, '..', 'client')));
 
 io.on('connection', function(socket){
   numActiveUsers += 1;
