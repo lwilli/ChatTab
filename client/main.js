@@ -3,7 +3,7 @@ $(function () {
 
     $('form').submit(function(){
         // Add their own message to the list
-        $('#messages').append($('<li>').text($('#m').val()).css('text-align', 'right'));
+        $('#chat').append($('<div class="my-message">').text($('#m').val()));
         window.scrollTo(0, document.body.scrollHeight);
         
         // Send the message to everyone else
@@ -13,7 +13,7 @@ $(function () {
     });
 
     socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
+        $('#chat').append($('<div class="their-message">').text(msg));
         window.scrollTo(0, document.body.scrollHeight);
     });
 
@@ -25,7 +25,7 @@ $(function () {
         setActiveUserCount(count);
     });
 
-    // When the user scrolls the page, execute myFunction 
+    // When the user scrolls the page, update the sticky header 
     window.onscroll = function() {updateStickyHeader()};
     
     // Get the header

@@ -1,0 +1,116 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+}
+
+body { 
+    font: 13px Helvetica, Arial;
+    min-width: 400px;
+    min-height: 500px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#chat {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+/* General message style */
+#chat .their-message, #chat .my-message {
+    border-radius: 15px;
+    padding: 8px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.their-message {
+    margin-right: 25%;
+    margin-left: 10px;
+    background-color: #eee;
+    align-self: flex-start;
+}
+
+.my-message {
+    color: white;
+    margin-left: 25%;
+    margin-right: 10px;
+    background: linear-gradient(to bottom, #5094ee 0%, #2574dc 100%);
+    background-attachment: fixed;
+    align-self: flex-end;
+}
+
+#user-count { 
+    padding: 1em; 
+    width: 100%; 
+    background: #ebebeb;
+    border-width: 1px;
+    border-bottom-width: 1px;
+    border-bottom-color:black;
+    border-bottom-style: solid;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+}
+
+form { 
+    background: #333; 
+    padding: 5px; 
+    position: fixed; 
+    bottom: 0; 
+    width: 100%;
+}
+
+form input {
+    border: 0; 
+    padding: 10px; 
+    width: 90%; 
+    margin-right: .5%;
+}
+
+form button { 
+    width: 9%; 
+    background: rgb(130, 224, 255); 
+    border: none; 
+    padding: 10px;
+}
+
+#messages {
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+}
+
+#messages li {
+    padding: 5px 10px;
+}
+
+#messages li:nth-child(odd) { 
+    background: #f0f0f0; 
+}
+
+#messages { 
+    margin-bottom: 40px
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+    padding-top: 102px;
+}
+
+
+
+
+
+/* ios message styles from https://codepen.io/swards/pen/gxQmbj */
