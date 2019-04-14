@@ -8,11 +8,12 @@ io.origins('*:*');
 
 var numActiveUsers = 0;
 
+// Serve ../index.html as homepage
 app.get('/', function(req, res){
-  // get ../index.html
   res.sendFile(path.resolve(__dirname, '..', 'index.html'));
 });
 
+// Use ../client as middleware (for chrome extension?)
 app.use('/client', express.static(path.resolve(__dirname, '..', 'client')));
 
 io.on('connection', function(socket){

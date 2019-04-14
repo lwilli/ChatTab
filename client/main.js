@@ -3,18 +3,32 @@ $(function () {
 
     $('form').submit(function(){
         // Add their own message to the list
-        $('#chat').append($('<div class="my-message">').text($('#m').val()));
-        window.scrollTo(0, document.body.scrollHeight);
+        var msg = $('#m').val();
+        updateUiWithMyMessage(msg);
         
         // Send the message to everyone else
-        socket.emit('chat message', $('#m').val());
+        socket.emit('chat message', msg);
+        // Clear the message from the chat box
         $('#m').val('');
         return false;
     });
 
-    socket.on('chat message', function(msg){
-        $('#chat').append($('<div class="their-message">').text(msg));
+    function updateUiWithMessage(message, messageClass) {
+        var elementToAdd = '<div class="' + messageClass + '">';
+        $('#chat').append($(elementToAdd).text(message));
         window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function updateUiWithMyMessage(msg) {
+        updateUiWithMessage(msg, "my-message");
+    }
+
+    function updateUiWithTheirMessage(msg) {
+        updateUiWithMessage(msg, "their-message");
+    }
+
+    socket.on('chat message', function(msg){
+        updateUiWithTheirMessage(msg);
     });
 
     function setActiveUserCount(count) {
