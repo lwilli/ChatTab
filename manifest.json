@@ -8,5 +8,5 @@
       "default_popup": "index.html"
   },
   "manifest_version": 2,
-  "content_security_policy":"script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js https://code.jquery.com/jquery-1.11.1.js; object-src 'self'"
+  "content_security_policy":"script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js https://code.jquery.com/jquery-1.11.1.js https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js; object-src 'self'"
 }
