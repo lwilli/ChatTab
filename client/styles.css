@@ -28,20 +28,34 @@ body {
     display: inline-block;
 }
 
-.their-message {
+/* Style for general message headers */
+[class*="message-header"] {
+    color: rgba(150, 150, 150, 0.75);
+    font-size: 12px;
+}
+
+/* Any class with "their" gets put to the left side */
+[class*="their"] {
     margin-right: 25%;
     margin-left: 10px;
-    background-color: #eee;
     align-self: flex-start;
+}
+
+.their-message {
+    background-color: #eee;
+}
+
+/* Any class with "my" gets put to the right side */
+[class*="my"] {
+    margin-left: 25%;
+    margin-right: 10px;
+    align-self: flex-end;
 }
 
 .my-message {
     color: white;
-    margin-left: 25%;
-    margin-right: 10px;
     background: linear-gradient(to bottom, #5094ee 0%, #2574dc 100%);
     background-attachment: fixed;
-    align-self: flex-end;
 }
 
 #user-count { 
@@ -113,4 +127,4 @@ form button {
 
 
 
-/* ios message styles from https://codepen.io/swards/pen/gxQmbj */
+/* iOS message styles from https://codepen.io/swards/pen/gxQmbj */

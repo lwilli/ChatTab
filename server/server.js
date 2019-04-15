@@ -20,8 +20,8 @@ io.on('connection', function(socket){
   numActiveUsers += 1;
   io.emit('user count', numActiveUsers);
   
-  socket.on('chat message', function(msg){
-    socket.broadcast.emit('chat message', msg);
+  socket.on('chat message', function(data){
+    socket.broadcast.emit('chat message', data);
   });
 
   socket.on('get user count', function(fn) {

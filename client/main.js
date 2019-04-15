@@ -1,34 +1,46 @@
 $(function () {
     var socket = io("https://chattab.herokuapp.com");
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     $('form').submit(function(){
         // Add their own message to the list
         var msg = $('#m').val();
-        updateUiWithMyMessage(msg);
+        const sentTime = moment().tz(timezone).format("LT L");
+        updateUiWithMyMessage(msg, "Anon", sentTime);
         
+        const data = {"message": msg, 
+                      "sender": "Anon",
+                      "sentTime": sentTime};
         // Send the message to everyone else
-        socket.emit('chat message', msg);
+        socket.emit('chat message', data);
+
         // Clear the message from the chat box
         $('#m').val('');
         return false;
     });
 
-    function updateUiWithMessage(message, messageClass) {
-        var elementToAdd = '<div class="' + messageClass + '">';
-        $('#chat').append($(elementToAdd).text(message));
+    function updateUiWithMessage(message, myOrTheir, sender, sentTime) {
+        const headerCssClass = myOrTheir + "message-header";
+        const messageHeaderElement = '<div class="' + headerCssClass + '">' + sender + ' - ' + sentTime + '</div>';
+        $('#chat').append($(messageHeaderElement));
+        
+        const messageCssClass = myOrTheir + "-message";
+        const messageElement = '<div class="' + messageCssClass + '">'
+        $('#chat').append($(messageElement).text(message));
+
         window.scrollTo(0, document.body.scrollHeight);
     }
 
-    function updateUiWithMyMessage(msg) {
-        updateUiWithMessage(msg, "my-message");
+    function updateUiWithMyMessage(msg, sender, sentTime) {
+        updateUiWithMessage(msg, "my", sender, sentTime);
     }
 
-    function updateUiWithTheirMessage(msg) {
-        updateUiWithMessage(msg, "their-message");
+    function updateUiWithTheirMessage(msg, sender, sentTime) {
+        updateUiWithMessage(msg, "their", sender, sentTime);
     }
 
-    socket.on('chat message', function(msg){
-        updateUiWithTheirMessage(msg);
+    socket.on('chat message', function(data){
+        updateUiWithTheirMessage(data.message, data.sender, data.sentTime);
     });
 
     function setActiveUserCount(count) {
