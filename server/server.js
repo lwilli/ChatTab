@@ -13,6 +13,9 @@ app.get('/', function(req, res){
   res.sendFile(path.resolve(__dirname, '..', 'index.html'));
 });
 
+// Serve up dependencies
+app.use(express.static(path.join(__dirname, '../client/dependencies')));
+
 // Use ../client as middleware (for chrome extension?)
 app.use('/client', express.static(path.resolve(__dirname, '..', 'client')));
 
