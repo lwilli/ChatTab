@@ -23,7 +23,7 @@ body {
 #chat .their-message, #chat .my-message {
     border-radius: 15px;
     padding: 8px 15px;
-    margin-top: 5px;
+    margin-top: 2px;
     margin-bottom: 5px;
     display: inline-block;
 }
